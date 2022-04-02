@@ -1,0 +1,24 @@
+.dialogs {
+    display: grid;
+    grid-template-areas:
+'d m';
+    grid-auto-columns: 2fr 10fr;
+
+}
+
+.dialog {
+    grid-area: d;
+}
+
+.dialogItems {
+    padding: 10px;
+    border-right: solid black;
+}
+
+.messages {
+    grid-area: m;
+    padding: 10px;
+}
+.active{
+    color: saddlebrown;
+}
