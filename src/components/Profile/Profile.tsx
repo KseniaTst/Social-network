@@ -1,19 +1,11 @@
-import { Posts } from "./Posts/Posts";
-// import clP from "./Profile.module.css";
-import clP from './Profile.module.css'
-import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PostType} from "../../App";
+import PostsContainer from "./Posts/PostsContainer";
+import ProfileInfoContainer from "./ProfileInfo/ProfileInfoContainer";
 
 
- type PostsPropsType= {
-     ProfilePage: {PostsData:Array<PostType>}
-     AddPost: (item:string)=>void
- }
-
-export const Profile = (props:PostsPropsType) => {
-    return (<div >
-            <ProfileInfo/>
-            <Posts PostsData={props.ProfilePage.PostsData} AddPost={props.AddPost} />
+export const Profile = () => {
+    return (<div>
+            <ProfileInfoContainer/>
+            <PostsContainer/>
         </div>
     )
 }

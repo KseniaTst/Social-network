@@ -1,15 +1,29 @@
 .nav{
-    grid-area: n;
-    background-color: burlywood;
-    text-align: center;
+    display: flex;
+    justify-content: right;
     padding: 25px;
+    width: 35vh;
    
   }
-.item a{
-  color: black;
-    text-decoration: none;
+.item{
+    text-align: left;
+    padding-top: 15px;
 }
-.item a.active{
-  color: lightgoldenrodyellow;
-  margin-top: 10px;
+.item a{
+
+  color: #0e0101;
+    text-decoration: none;
+    font-weight: 400;
+    padding-left: 5px;
+}
+
+.item a:focus{
+    color: #21649f;
+    margin-top: 10px;
+}
+.item a:hover{
+    color: #21649f;
+}
+.imges{
+    padding-top: 13px;
 }
