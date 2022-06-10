@@ -1,66 +1,44 @@
-import React, {useState} from "react";
+import React from "react";
 import './App.css';
 import { Profile } from "./components/Profile/Profile";
-import { Header } from "./components/Header/Header";
-import { Nav } from "./components/Nav/Nav";
-import { Dialogs } from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import { NavBar } from "./components/Nav/NavBar";
+import { HashRouter, Route} from "react-router-dom";
 import { News } from "./components/News/News";
 import { Music } from "./components/Music/Music";
 import { Settings } from "./components/Settings/Settings";
-import {v1} from "uuid";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
+import {HeaderContainer} from "./components/Header/HeaderContainer";
+import LoginPage from "./components/LoginPage/Login";
 
-export type DialogType={
-    id:string
-    name:string
-}
-export type MessageType={
-    id:string
-    title:string
-}
-export type PostType={
-    id:string
-    message:string
-    value:number
-}
 
 type AppProps= {
-    state:{
-           DialogsPage: {DialogsData:Array<DialogType>, MessagesData:Array<MessageType>},
-           ProfilePage:{PostsData:Array<PostType>}
-    }
-    AddPost:(item:string)=>void
+    // // dispatch: (action: ActionTypes)=>void
+      //store:RootStoreType
 }
 
 
 
 function App(props:AppProps) {
 
-    // let [posts,setPosts]=useState<PostType[]>(props.state.ProfilePage.PostsData)
-    // console.log(posts)
-    // const AddPost=(message:string)=>{
-    //     let newPost= {id:v1(), message:message, value: 32 }
-    //     setPosts([newPost,...posts])
-    //
-    // }
-
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div className="app-wrapper  ">
-                <Header/>
-                <Nav/>
-                {/* <Content /> */}
+
+                <HeaderContainer/>
+                <NavBar/>
                 <div className="app-wrapper-content">
-                    <Route path='/dialogs' render={()=><Dialogs DialogsPage={props.state.DialogsPage}/>} />
-                    <Route path='/profile' render={()=><Profile
-                        AddPost={props.AddPost}
-                        ProfilePage={props.state.ProfilePage}/>}/>
+                    <Route path='/dialogs' render={()=><DialogsContainer />} />
+                    <Route path='/profile/:userId?' render={()=><Profile/>}/>
                     <Route path='/news' render={()=><News/>}/>
                     <Route path='/music' render={()=><Music/>}/>
                     <Route path='/settings' render={()=><Settings/>}/>
+                    <Route path='/users' render={()=><UsersContainer/>}/>
+                    <Route path='/login' render={()=><LoginPage/>}/>
                 </div>
             </div>
-        </BrowserRouter>
+        </HashRouter>
+
     );
 }
 

@@ -2,9 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import state, {AddPost} from "./data/state";
+import {BrowserRouter} from "react-router-dom";
+import store from "./data/Store-Redux";
+import {Provider} from "react-redux";
+
+
 ReactDOM.render(
-    <App state={state}  AddPost={AddPost} />,
-  document.getElementById('root')
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>, document.getElementById('root')
 );
-//Add={AddPost}

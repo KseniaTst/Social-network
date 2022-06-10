@@ -1,16 +1,22 @@
-.app-wrapper{
-display: grid;
-margin: 0 auto;
-width: 100%;
-grid-template-areas: 
-"h h"
-"n c";
-grid-template-rows: 60px 1fr;
-grid-template-columns: 2fr 10fr;
+.app-wrapper {
+    display: grid;
+    margin: 0 auto;
+    width: 100%;
+    
+    grid-template-areas:
+"h h "
+"n c ";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    background: #eae4e4 100%;
+    
 }
-.app-wrapper-content{
+
+.app-wrapper-content {
+    align-items: center;
+    width: 130vh;
     grid-area: c;
-    background-color: beige;
+    background-color: #f5f1f1;
 }
 
 
