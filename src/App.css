@@ -13,6 +13,7 @@
 }
 
 .app-wrapper-content {
+    min-height: 100vh;
     align-items: center;
     width: 130vh;
     grid-area: c;

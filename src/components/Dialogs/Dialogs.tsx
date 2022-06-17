@@ -4,9 +4,8 @@ import {DialogItem} from "./DialogItem";
 import {DialogsPageType} from "../../data/store";
 import {ChangeEvent, useState} from "react";
 import { Button } from '@mui/material';
-import {Redirect} from "react-router-dom";
 
-type DialogsPropsType = {
+export type DialogsPropsType = {
     DialogsPage: DialogsPageType
     addMessage: (message: string)=>void
    isAuth:boolean
@@ -20,7 +19,7 @@ export const Dialogs = (props: DialogsPropsType) => {
         setMessage(e.currentTarget.value)
     }
 
-    if (!props.isAuth)return <Redirect to={'/login'}/>;
+
 
     const OnClickButtonHandler = () => {
         props.addMessage(message)

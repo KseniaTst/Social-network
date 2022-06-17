@@ -41,7 +41,6 @@ export const AuthReducer=(state:InitialStateType= initialState,action:ActionType
         case 'SET-USER-DATA':
             return {...state, data:{...action.data}, isAuth:true}
         case 'SET-LOGINED-USER-PHOTO':
-            debugger
             return {...state, loginedUserPhoto:action.userPhoto}
         default:
             return state
