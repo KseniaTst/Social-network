@@ -1,28 +1,34 @@
 import {TextField} from "@mui/material";
 import s from "./ProfileInfo.module.css";
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
 
 type PropsType={
-    aboutMe:string
+    status:string
+    updateStatus:(status:string)=>void
 }
 
 export const StatusProfile=(props:PropsType)=>{
 
     let [editMode,setEditMode]=useState<boolean>(false)
+    let [newStatus,setNewStatus]=useState<string>(props.status)
 
-    const ActivateEditMose=()=>{
+    const ActivateEditMode=()=>{
         setEditMode(true)
     }
-    const DeActivateEditMose=()=>{
+    const DeActivateEditMode=()=>{
         setEditMode(false)
+        props.updateStatus(newStatus)
     }
 
+const onChange=(e:ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
+        setNewStatus(e.currentTarget.value)
+}
 
     return(
-        <div onDoubleClick={ActivateEditMose} onBlur={DeActivateEditMose} >
+        <div onDoubleClick={ActivateEditMode} onBlur={DeActivateEditMode} >
             {editMode?
-                <TextField autoFocus className={s.status} variant={'standard'}/>
-                : <span  className={s.status}>{props.aboutMe}</span>}
+                <TextField onChange={onChange} value={newStatus} autoFocus className={s.status} variant={'standard'}/>
+                : <span  className={s.status}>{props.status}</span>}
 
         </div>
     )

@@ -1,6 +1,6 @@
 import {ActionTypes} from "./store";
 import {Dispatch} from "redux";
-import {follow, getUsers, unfollow} from "../API/api";
+import { UsersAPI} from "../API/api";
 
 export type UserType = {
     id: number,
@@ -115,7 +115,7 @@ export const IsFollowingAC=(isFollowing:boolean,userId:number):IsFollowingAT=>({
 
 export const getUsersTC=(pageSize:number,currentPage:number)=>(dispatch:Dispatch)=>{
     dispatch(ChangeFetchingAC(true))
-    getUsers(pageSize,currentPage)
+    UsersAPI.getUsers(pageSize,currentPage)
         .then(data => {
             dispatch(setCurrentPageAC(currentPage))
             dispatch(ChangeFetchingAC(false))
@@ -125,7 +125,7 @@ export const getUsersTC=(pageSize:number,currentPage:number)=>(dispatch:Dispatch
 }
 export const followTC = (id: number) => (dispatch: Dispatch) => {
     dispatch(IsFollowingAC(true, id))
-    follow(id)
+    UsersAPI.follow(id)
         .then(data => {
             if (data.resultCode == 0) {
                 dispatch(followAC(id))
@@ -135,7 +135,7 @@ export const followTC = (id: number) => (dispatch: Dispatch) => {
 }
 export const unfollowTC = (id: number) => (dispatch: Dispatch) => {
     dispatch(IsFollowingAC(true,id))
-    unfollow(id)
+    UsersAPI.unfollow(id)
         .then(data => {
             if (data.resultCode == 0) {
              dispatch(unfollowAC(id))

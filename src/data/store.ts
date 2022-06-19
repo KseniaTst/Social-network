@@ -1,4 +1,4 @@
-import { ProfileType, SetProfileAT} from "./Profile-reducer";
+import {ProfileType, SetProfileAT, SetStatusAT} from "./Profile-reducer";
 import {
     ChangeFetchingActionType,
     FollowActionType, IsFollowingAT,
@@ -61,7 +61,7 @@ export type AddMessageActionType = {
     message: string
 }
 export type ActionTypes = AddPostActionType | AddMessageActionType| FollowActionType|UnFollowActionType|SetUsersActionType|SetCurrentPageActionType
-    |SetTotalUsersCountActionType|ChangeFetchingActionType|SetProfileAT|SetUserDataAT|SetLoginedUserAT|IsFollowingAT
+    |SetTotalUsersCountActionType|ChangeFetchingActionType|SetProfileAT|SetUserDataAT|SetLoginedUserAT|IsFollowingAT|SetStatusAT
 
 
 // let store: Storetype = {

@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React, {memo, useEffect} from "react";
 import {connect} from "react-redux";
 import {ProfileInfo} from "./ProfileInfo";
 import {RootStoreType} from "../../../data/Store-Redux";
-import {ProfileType, SetProfileAC, SetProfileTC, useAppDispatch} from "../../../data/Profile-reducer";
+import {ProfileType, SetProfileTC, SetStatusTC, UpdateStatusTC, useAppDispatch} from "../../../data/Profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
 import {compose} from "redux";
@@ -13,14 +13,14 @@ type PathParamsType = {
     userId: number
 }
 type ProfileInfoContainerType = {
-    setProfile: (profile: ProfileType) => void
     profile: ProfileType
+    status:string
 }
 
 // @ts-ignore
 type PropsType = RouteComponentProps<PathParamsType> & ProfileInfoContainerType
 
-function ProfileInfoContainer(props: PropsType) {
+const ProfileInfoContainer=memo( function (props: PropsType) {
 
 const dispatch=useAppDispatch()
 
@@ -28,21 +28,29 @@ const dispatch=useAppDispatch()
         let userId = props.match.params.userId
         if (!userId) userId = 2
         dispatch(SetProfileTC(userId))
-    }, [])
+        dispatch(SetStatusTC(userId))
+
+    }, [dispatch])
+
+     const UpdateStatus=(status:string)=>{
+
+    dispatch(UpdateStatusTC(status))
+    }
 
     return (
-        <ProfileInfo {...props} profile={props.profile}/>
+        <ProfileInfo {...props} profile={props.profile} updateStatus={UpdateStatus}/>
 
     )
-}
+})
 
 const mapStateToProps = (state: RootStoreType) => ({
-    profile: state.ProfilePage.ProfileData
+    profile: state.ProfilePage.ProfileData,
+    status: state.ProfilePage.ProfileData.status
 })
 
 
 export default compose<React.ComponentType>(
-    withAuthRedirect,
     withRouter,
-    connect(mapStateToProps, {setProfile:SetProfileAC})
+    withAuthRedirect,
+    connect(mapStateToProps, {})
 )(ProfileInfoContainer)
