@@ -1,6 +1,6 @@
 import "./Header.css"
 import {Header} from "./Header";
-import {useEffect} from "react";
+import {memo, useEffect} from "react";
 import {connect} from "react-redux";
 import {RootStoreType} from "../../data/Store-Redux";
 import {DataType, LoginUserTC,SetUserDataAC} from "../../data/auth-reducer";
@@ -13,19 +13,18 @@ type PropsType={
     SetUserData: (data: DataType) => void
 }
 
-const settings = {
-    withCredentials: true
-}
 
-export const HeaderAPI = (props: PropsType) => {
+export const HeaderAPI = memo((props: PropsType) => {
 const dispatch=useAppDispatch()
     useEffect(() => {
         dispatch(LoginUserTC())
-    })
+        let isAuthStr =  props.isAuth.toString()
+        localStorage.setItem('isAuth',isAuthStr)
+    },[props.isAuth])
     return (
         <Header isAuth={props.isAuth} login={props.login} userPhoto={props.userPhoto}/>
     )
-}
+})
 const mapStateToprops= (state:RootStoreType)=>({
     isAuth:state.AuthUser.isAuth,
     login:state.AuthUser.data.login,
