@@ -2,7 +2,7 @@
     display: grid;
     margin: 0 auto;
     width: 100%;
-    
+
     grid-template-areas:
 "h h "
 "n c ";
