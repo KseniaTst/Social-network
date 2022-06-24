@@ -31,6 +31,7 @@ export type UsersAPIPropsType = {
 class UsersAPIComponent extends React.Component<UsersAPIPropsType> {
 
     componentDidMount() {
+
         this.props.getUsersTC(this.props.PageSize,this.props.CurrentPage)
     }
 

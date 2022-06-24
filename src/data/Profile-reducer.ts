@@ -7,7 +7,7 @@ import {RootStoreType} from "./Store-Redux";
 import {useDispatch} from "react-redux";
 
 export type ProfileType={
-    aboutMe: string
+    status: string
     contacts: {
         facebook: string
         website: null
@@ -34,6 +34,7 @@ export type SetProfileAT={
     profile:ProfileType
 
 }
+export type SetStatusAT= ReturnType<typeof SetStatusAC>
 
 
 let initialState:initialStateType = {
@@ -42,7 +43,7 @@ let initialState:initialStateType = {
         {id: v1(), message: 'It is my first message', value: 15},
     ],
     ProfileData: {
-        aboutMe: '',
+        status: '',
         contacts: {
             facebook: '',
             website: null,
@@ -82,6 +83,10 @@ export const ProfileReducer = (state: initialStateType = initialState, action: A
                 ProfileData: action.profile
 
             }
+        case 'SET-STATUS':
+            return {
+                ...state, ProfileData:{...state.ProfileData, status:action.status}
+            }
 
         default:
             return state
@@ -95,10 +100,25 @@ export const SetProfileAC = (profile: ProfileType): SetProfileAT => ({
     type: 'SET-PROFILE',
     profile
 }) as const
+export const SetStatusAC=(status:string)=>({
+    type:'SET-STATUS',
+    status
+})as const
 
 export const SetProfileTC=(userId:number)=>(dispatch:Dispatch)=>{
     ProfileAPI.getProfile(userId)
         .then(response => {
             dispatch( SetProfileAC(response.data))
+        })
+}
+export const SetStatusTC=(userId:number)=>(dispatch:Dispatch)=>{
+    ProfileAPI.getStatus(userId)
+        .then(res=> {
+            dispatch(SetStatusAC(res.data))})
+}
+export const UpdateStatusTC=(status:string)=>(dispatch:Dispatch)=>{
+    ProfileAPI.updateStatus(status)
+        .then(res=>{
+            dispatch(SetStatusAC(status))
         })
 }

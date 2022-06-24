@@ -7,7 +7,7 @@ import {
     SetUsersActionType,
     UnFollowActionType
 } from "./Users-reducer";
-import {SetLoginedUserAT, SetUserDataAT} from "./auth-reducer";
+import {LogoutAT, SetLoginedUserAT, SetNewUserDataAT, SetUserDataAT} from "./auth-reducer";
 
 
 export type DialogType = {
@@ -60,8 +60,10 @@ export type AddMessageActionType = {
     type: 'ADD-Message'
     message: string
 }
-export type ActionTypes = AddPostActionType | AddMessageActionType| FollowActionType|UnFollowActionType|SetUsersActionType|SetCurrentPageActionType
-    |SetTotalUsersCountActionType|ChangeFetchingActionType|SetProfileAT|SetUserDataAT|SetLoginedUserAT|IsFollowingAT|SetStatusAT
+export type ActionTypes = AddPostActionType | AddMessageActionType| FollowActionType|UnFollowActionType
+    |SetUsersActionType|SetCurrentPageActionType|SetNewUserDataAT
+    |SetTotalUsersCountActionType|ChangeFetchingActionType|SetProfileAT|SetUserDataAT|SetLoginedUserAT
+    |IsFollowingAT|SetStatusAT|LogoutAT
 
 
 // let store: Storetype = {

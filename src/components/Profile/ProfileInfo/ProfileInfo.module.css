@@ -30,12 +30,29 @@
     width: 90%;
     border-radius: 50%;
 }
+.statusContainer{
+    display: flex;
+    align-items: center;
+    min-width: 500px;
+    max-height: 50px;
+}
 .status{
+    margin-top: 15px;
     margin-left: 5vh;
-    padding: 10px;
+    padding-top:5px ;
+    padding-bottom: 5px;
+    padding-left: 10px;
     min-width: 15vh;
     background: #eae4e4 100%;
     border-radius: 10px;
+}
+.form{
+    display: flex;
+    flex-direction: row;
+}
+.form Button{
+    margin-left: 15px;
+    max-height: 30px;
 }
 .infomationContainer{
     display: flex;

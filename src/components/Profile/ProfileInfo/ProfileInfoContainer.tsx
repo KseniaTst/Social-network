@@ -15,6 +15,7 @@ type PathParamsType = {
 type ProfileInfoContainerType = {
     profile: ProfileType
     status:string
+    AuthUserId:number
 }
 
 // @ts-ignore
@@ -25,8 +26,10 @@ const ProfileInfoContainer=memo( function (props: PropsType) {
 const dispatch=useAppDispatch()
 
     useEffect(() => {
-        let userId = props.match.params.userId
-        if (!userId) userId = 2
+        let userId = props.match.params.userId;
+
+        if (!userId) userId = props.AuthUserId
+
         dispatch(SetProfileTC(userId))
         dispatch(SetStatusTC(userId))
 
@@ -45,7 +48,8 @@ const dispatch=useAppDispatch()
 
 const mapStateToProps = (state: RootStoreType) => ({
     profile: state.ProfilePage.ProfileData,
-    status: state.ProfilePage.ProfileData.status
+    status: state.ProfilePage.ProfileData.status,
+    AuthUserId:state.AuthUser.data.id
 })
 
 
