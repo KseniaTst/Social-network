@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom"
 import "./Header.css"
 import {memo} from "react";
+import UserPhoto from '../../assets/photos/ProfileUserPhoto.png'
 
 type HeaderPropsType={
     isAuth:boolean|null
@@ -20,9 +21,9 @@ export const Header= memo(function  (props:HeaderPropsType) {
         <header className="header">
             <img src="https://apkbigs.com/media/2021/08/_3/800x600/dolphin-emulator-apk_fc1ce.jpg" />
             <div className={'loginBlock'}>
-                <img src={props.userPhoto}/>
+                {props.userPhoto? <img src={props.userPhoto}/>: <img src={UserPhoto}/>}
                 {props.isAuth?
-                    <div>
+                    <div className={"Login"}>
                         {props.login}
                         <NavLink to={'/login'} onClick={logoutHandler}>Logout</NavLink>
                     </div>

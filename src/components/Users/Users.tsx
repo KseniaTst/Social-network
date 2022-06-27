@@ -1,6 +1,6 @@
 import st from "./Users.module.css";
 import userPhoto from "../../assets/photos/avatar-profile-picture.jpg";
-import {Button, CircularProgress} from "@mui/material";
+import {Button, CircularProgress, Pagination} from "@mui/material";
 import React from "react";
 import {UsersType} from "../../data/Users-reducer";
 import {NavLink} from "react-router-dom";
@@ -23,10 +23,10 @@ export type UsersPropsType = {
 export let Users = (props: UsersPropsType) => {
 
     let PagesCount = Math.ceil(props.TotalUsersCount / props.PageSize)
-    let pages = []
-    for (let i = 1; i <= PagesCount; i++) {
-        pages.push(i)
-    }
+    // let pages:Array<number> = []
+    // for (let i = 1; i <= PagesCount; i++) {
+    //     pages.push(i)
+    // }
     const onClickFollow = (id: number) => {
         props.followTC(id)
     }
@@ -39,10 +39,8 @@ export let Users = (props: UsersPropsType) => {
     return <div className={st.container}>
         {props.isFetching && <CircularProgress/>}
         <div>
-            {pages.map(p => {
-                return <span onClick={() => props.onSetCurrentPage(p)}
-                             className={props.CurrentPage === p ? st.selectedPage : ''}>{p}</span>
-            })}
+            <Pagination onChange= {(event: React.ChangeEvent<unknown>, page: number) => props.onSetCurrentPage(page)}
+                        count={PagesCount} variant="outlined" color="primary" />
         </div>
         {
             props.Users.map(el =>

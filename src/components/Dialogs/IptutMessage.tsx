@@ -15,7 +15,7 @@ export const InputMessage = ( props:any) => {
         <div>
             <TextField {...input}{...rest}/>
         </div>
-        {meta.touched && meta.error && <span>{meta.error}</span>}
+        {meta.touched && meta.error && <span>Field is empty</span>}
     </div>
 
 }

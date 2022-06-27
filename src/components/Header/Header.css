@@ -10,5 +10,12 @@
     border-radius: 50%;
 }
 .loginBlock{
+    display: flex;
+  flex-direction: row;
     float: right;
+    padding-right: 15px;
+}
+.Login{
+    display: flex;
+    flex-direction: column;
 }

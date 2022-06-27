@@ -56,7 +56,7 @@ export type IsFollowingAT={
 
 let initialState: InitialStateType = {
     UsersData: [],
-    PageSize: 25,
+    PageSize: 15,
     TotalUsersCount: 0,
     CurrentPage: 1,
     isFething: true,
