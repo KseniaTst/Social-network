@@ -5,6 +5,10 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {RootStoreType} from "../../data/Store-Redux";
 import {Redirect} from "react-router-dom";
+import s from './Login.module.css'
+import {MinLengthCreator, RequiredField} from "../../utils/validators/FormValidators";
+import {CustomInput} from "../FormComponents/CustomInput";
+import {Button, Checkbox, FormControlLabel} from "@mui/material";
 
 type FormDataType={
     login:string
@@ -16,21 +20,22 @@ type PropsType={
     NewLoginUserTC:(login: string, password: string, rememberMe: boolean)=>void
 }
 
+let MinSymbolsLength8=MinLengthCreator(4)
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} className={s.form}>
             <div>
-                <Field placeholder={"Login"} name={'login'} component={'input'}/>
+                <Field placeholder={"Login"} name={'login'} component={CustomInput} validate={[RequiredField]}/>
             </div>
             <div>
-                <Field placeholder={"Password"} name={'password'} component={'input'} type={'password'}/>
+                <Field placeholder={"Password"} name={'password'} component={CustomInput} type={'password'} validate={[RequiredField, MinSymbolsLength8]}/>
             </div>
             <div>
-                <Field type={"checkbox"} name={'rememberMe'} component={'input'}/>
+                <FormControlLabel control={<Checkbox defaultChecked />} label="Remember Me" />
             </div>
             <div>
-                <button type={"submit"}>Login</button>
+                <Button variant={"outlined"} type={"submit"}>Login</Button>
             </div>
         </form>
     )
@@ -46,8 +51,8 @@ const LoginReduxForm=reduxForm<FormDataType>({form:'login'})(LoginForm)
         return <Redirect to={'/profile'}/>
     }
     return (
-        <div>
-            <h1> LOGIN FIRST</h1>
+        <div className={s.loginPageContainer}>
+            <h1>Please, login first</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
         </div>
     )

@@ -1,5 +1,5 @@
 import s from "./ProfileInfo.module.css";
-import {FocusEvent, useState} from "react";
+import { useState} from "react";
 import {AddStatusReduxForm, FormAddStatusDataType} from "./StatusForm";
 
 type PropsType={

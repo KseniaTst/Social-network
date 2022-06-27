@@ -2,7 +2,7 @@
     display: flex;
     justify-content: right;
     padding: 25px;
-    width: 35vh;
+    min-width: 35vh;
    
   }
 .item{

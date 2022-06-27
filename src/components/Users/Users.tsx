@@ -38,7 +38,7 @@ export let Users = (props: UsersPropsType) => {
 
     return <div className={st.container}>
         {props.isFetching && <CircularProgress/>}
-        <div>
+        <div className={st.paginationContainer}>
             <Pagination onChange= {(event: React.ChangeEvent<unknown>, page: number) => props.onSetCurrentPage(page)}
                         count={PagesCount} variant="outlined" color="primary" />
         </div>
@@ -54,7 +54,10 @@ export let Users = (props: UsersPropsType) => {
                         </div>
                         <div className={st.inf}>
                             <div>{el.name}</div>
-                            <div>{'el.location.country'},{'el.location.city'}</div>
+                            <div className={st.locationContainer}>
+                                <span>{'el.location.country'}</span> ,
+                                <span>{'el.location.city'}</span>
+                            </div>
                             <div>{el.status !== null ? el.status : 'no status'}</div>
                         </div>
                         <div>

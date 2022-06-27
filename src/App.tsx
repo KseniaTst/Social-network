@@ -52,6 +52,7 @@ const App = memo(function () {
                     <Route path='/users' render={()=><UsersContainer/>}/>
                     <Route path='/login' render={()=><LoginPageContainer/>}/>
                 </div>
+                <div className={"app-right-space"}></div>
             </div>
         </HashRouter>
 
