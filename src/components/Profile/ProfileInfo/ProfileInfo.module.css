@@ -32,16 +32,15 @@
 }
 .statusContainer{
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: baseline;
     min-width: 500px;
     max-height: 50px;
 }
 .status{
     margin-top: 15px;
-    margin-left: 5vh;
     padding-top:5px ;
     padding-bottom: 5px;
-    padding-left: 10px;
     min-width: 15vh;
     background: #eae4e4 100%;
     border-radius: 10px;

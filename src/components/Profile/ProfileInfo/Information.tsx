@@ -36,7 +36,7 @@ export const Information=(props:PropsType)=>{
     return (
         <div>
             <div>
-                <Button style={{color: 'black'}} onClick={onShowInfClick}>Information</Button>
+                <Button style={{color: 'black', border:'1px solid black'}} variant="outlined" onClick={onShowInfClick}>Information</Button>
             </div>
             {showInform ?
                 <div className={s.infomationContainer}>

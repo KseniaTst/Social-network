@@ -22,6 +22,7 @@ export const StatusProfile=(props:PropsType)=>{
 
     return (
         <div onDoubleClick={ActivateEditMode} className={s.statusContainer}>
+           <div style={{ marginTop:'15px'}}> Status: </div>
                 {editMode ?
                     <AddStatusReduxForm onSubmit={onSubmit}/>
 

@@ -26,7 +26,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.form}>
             <div>
-                <Field placeholder={"Login"} name={'login'} component={CustomInput} validate={[RequiredField]}/>
+                <Field placeholder={"Login or Email"} name={'login'} component={CustomInput} validate={[RequiredField]}/>
             </div>
             <div>
                 <Field placeholder={"Password"} name={'password'} component={CustomInput} type={'password'} validate={[RequiredField, MinSymbolsLength8]}/>
@@ -54,6 +54,9 @@ const LoginReduxForm=reduxForm<FormDataType>({form:'login'})(LoginForm)
         <div className={s.loginPageContainer}>
             <h1>Please, login first</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
+            <span>Test account: </span>
+            <span>Email: free@samuraijs.com</span>
+            <span>Password: free</span>
         </div>
     )
 }
