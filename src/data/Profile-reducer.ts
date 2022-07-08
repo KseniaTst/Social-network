@@ -80,14 +80,13 @@ export const ProfileReducer = (state: initialStateType = initialState, action: A
 
             return {
                 ...state,
-                ProfileData: action.profile
+                ProfileData: {...state.ProfileData, ...action.profile }
 
             }
         case 'SET-STATUS':
             return {
                 ...state, ProfileData:{...state.ProfileData, status:action.status}
             }
-
         default:
             return state
     }
@@ -108,17 +107,20 @@ export const SetStatusAC=(status:string)=>({
 export const SetProfileTC=(userId:number)=>(dispatch:Dispatch)=>{
     ProfileAPI.getProfile(userId)
         .then(response => {
+
             dispatch( SetProfileAC(response.data))
         })
 }
 export const SetStatusTC=(userId:number)=>(dispatch:Dispatch)=>{
     ProfileAPI.getStatus(userId)
         .then(res=> {
+
             dispatch(SetStatusAC(res.data))})
 }
 export const UpdateStatusTC=(status:string)=>(dispatch:Dispatch)=>{
     ProfileAPI.updateStatus(status)
         .then(res=>{
+
             dispatch(SetStatusAC(status))
         })
 }

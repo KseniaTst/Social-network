@@ -1,5 +1,5 @@
 import s from "./ProfileInfo.module.css";
-import { useState} from "react";
+import {memo, useState} from "react";
 import {AddStatusReduxForm, FormAddStatusDataType} from "./StatusForm";
 
 type PropsType={
@@ -7,7 +7,7 @@ type PropsType={
     updateStatus:(status:string)=>void
 }
 
-export const StatusProfile=(props:PropsType)=>{
+export const StatusProfile=memo((props:PropsType)=>{
 
     let [editMode,setEditMode]=useState<boolean>(false)
 
@@ -15,7 +15,6 @@ export const StatusProfile=(props:PropsType)=>{
         setEditMode(true)
     }
     const onSubmit=(formData:FormAddStatusDataType)=>{
-        debugger
         props.updateStatus(formData.status)
         setEditMode(false)
     }
@@ -30,4 +29,4 @@ export const StatusProfile=(props:PropsType)=>{
 
         </div>
     )
-}
+})

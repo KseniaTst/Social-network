@@ -26,6 +26,7 @@ const ProfileInfoContainer=memo( function (props: PropsType) {
 const dispatch=useAppDispatch()
 
     useEffect(() => {
+
         let userId = props.match.params.userId;
 
         if (!userId) userId = props.AuthUserId
@@ -33,7 +34,7 @@ const dispatch=useAppDispatch()
         dispatch(SetProfileTC(userId))
         dispatch(SetStatusTC(userId))
 
-    }, [dispatch])
+    }, [])
 
      const UpdateStatus=(status:string)=>{
 
@@ -41,7 +42,7 @@ const dispatch=useAppDispatch()
     }
 
     return (
-        <ProfileInfo {...props} profile={props.profile} updateStatus={UpdateStatus}/>
+        <ProfileInfo {...props} status={props.status} profile={props.profile} updateStatus={UpdateStatus}/>
 
     )
 })
