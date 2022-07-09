@@ -2,11 +2,17 @@ import React, {memo, useEffect} from "react";
 import {connect} from "react-redux";
 import {ProfileInfo} from "./ProfileInfo";
 import {RootStoreType} from "../../../data/Store-Redux";
-import {ProfileType, SetProfileTC, SetStatusTC, UpdateStatusTC, useAppDispatch} from "../../../data/Profile-reducer";
+import {
+    ProfileType,
+    SetProfileTC,
+    SetSmallPhotoTC,
+    SetStatusTC,
+    UpdateStatusTC,
+    useAppDispatch
+} from "../../../data/Profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
 import {compose} from "redux";
-
 
 
 type PathParamsType = {
@@ -14,16 +20,21 @@ type PathParamsType = {
 }
 type ProfileInfoContainerType = {
     profile: ProfileType
-    status:string
-    AuthUserId:number
+    status: string
+    AuthUserId: number
 }
 
 // @ts-ignore
 type PropsType = RouteComponentProps<PathParamsType> & ProfileInfoContainerType
 
-const ProfileInfoContainer=memo( function (props: PropsType) {
+const ProfileInfoContainer = memo(function (props: PropsType) {
 
-const dispatch=useAppDispatch()
+    const dispatch = useAppDispatch()
+
+    const addSmallPhoto = (smallPhoto: any) => {
+
+        dispatch(SetSmallPhotoTC(smallPhoto))
+    }
 
     useEffect(() => {
 
@@ -34,15 +45,16 @@ const dispatch=useAppDispatch()
         dispatch(SetProfileTC(userId))
         dispatch(SetStatusTC(userId))
 
-    }, [])
+    }, [props.match.params.userId,props.profile.photos])
 
-     const UpdateStatus=(status:string)=>{
+    const UpdateStatus = (status: string) => {
 
-    dispatch(UpdateStatusTC(status))
+        dispatch(UpdateStatusTC(status))
     }
 
     return (
-        <ProfileInfo {...props} status={props.status} profile={props.profile} updateStatus={UpdateStatus}/>
+        <ProfileInfo {...props} status={props.status} profile={props.profile} updateStatus={UpdateStatus}
+                     isOwner={!props.match.params.userId} setNewPhoto={addSmallPhoto}/>
 
     )
 })
@@ -50,7 +62,7 @@ const dispatch=useAppDispatch()
 const mapStateToProps = (state: RootStoreType) => ({
     profile: state.ProfilePage.ProfileData,
     status: state.ProfilePage.ProfileData.status,
-    AuthUserId:state.AuthUser.data.id
+    AuthUserId: state.AuthUser.data.id
 })
 
 

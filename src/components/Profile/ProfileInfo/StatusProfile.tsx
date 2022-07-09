@@ -5,6 +5,7 @@ import {AddStatusReduxForm, FormAddStatusDataType} from "./StatusForm";
 type PropsType={
     status:string
     updateStatus:(status:string)=>void
+    isOwn:boolean
 }
 
 export const StatusProfile=memo((props:PropsType)=>{
@@ -22,7 +23,7 @@ export const StatusProfile=memo((props:PropsType)=>{
     return (
         <div onDoubleClick={ActivateEditMode} className={s.statusContainer}>
            <div style={{ marginTop:'15px'}}> Status: </div>
-                {editMode ?
+                {editMode && props.isOwn?
                     <AddStatusReduxForm onSubmit={onSubmit}/>
 
                     : <span className={s.status}>{props.status}</span>}

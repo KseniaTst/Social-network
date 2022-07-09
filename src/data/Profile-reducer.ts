@@ -35,6 +35,7 @@ export type SetProfileAT={
 
 }
 export type SetStatusAT= ReturnType<typeof SetStatusAC>
+export type SetSmallPhotoAT=ReturnType<typeof SetSmallPhotoAC>
 
 
 let initialState:initialStateType = {
@@ -87,6 +88,11 @@ export const ProfileReducer = (state: initialStateType = initialState, action: A
             return {
                 ...state, ProfileData:{...state.ProfileData, status:action.status}
             }
+        case 'SET-PHOTO':
+            return {...state,
+                ProfileData:{...state.ProfileData, photos:action.photo}
+
+            }
         default:
             return state
     }
@@ -103,6 +109,10 @@ export const SetStatusAC=(status:string)=>({
     type:'SET-STATUS',
     status
 })as const
+export const SetSmallPhotoAC=(photo:any)=>({
+    type:'SET-PHOTO',
+    photo
+}as const)
 
 export const SetProfileTC=(userId:number)=>(dispatch:Dispatch)=>{
     ProfileAPI.getProfile(userId)
@@ -114,13 +124,20 @@ export const SetProfileTC=(userId:number)=>(dispatch:Dispatch)=>{
 export const SetStatusTC=(userId:number)=>(dispatch:Dispatch)=>{
     ProfileAPI.getStatus(userId)
         .then(res=> {
-
             dispatch(SetStatusAC(res.data))})
 }
 export const UpdateStatusTC=(status:string)=>(dispatch:Dispatch)=>{
     ProfileAPI.updateStatus(status)
         .then(res=>{
-
             dispatch(SetStatusAC(status))
+        })
+}
+export const SetSmallPhotoTC=(smallPhoto:any)=>(dispatch:Dispatch)=>{
+    ProfileAPI.updatePhoto(smallPhoto)
+        .then(res=>{
+
+            if(res.status===200){
+                dispatch(SetSmallPhotoAC(res.data.data.photos))
+            }
         })
 }
