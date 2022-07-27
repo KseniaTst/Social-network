@@ -53,3 +53,9 @@
     cursor: pointer;
     margin: 0 auto;
 }
+.chooseFile{
+    z-index: 1;
+    align-self: flex-end;
+    position: absolute;
+    padding-left: 50%;
+}

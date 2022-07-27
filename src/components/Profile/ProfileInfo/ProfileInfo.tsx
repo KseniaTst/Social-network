@@ -35,10 +35,11 @@ const onAddSmallPhotoHandler=(e:ChangeEvent<HTMLInputElement>)=>{
                     <div className={s.userPhotodiv}>
                         <img className={s.userPhoto}
                              src={props.profile.photos.small ? props.profile.photos.small : userPhoto}/>
+                        {props.isOwner && <DownloadFile onChange={onAddSmallPhotoHandler}/>}
                     </div>
                     <StatusProfile status={props.status} updateStatus={props.updateStatus} isOwn={props.isOwner}/>
-                    {props.isOwner &&<input type={'file'} onChange={onAddSmallPhotoHandler}/>}
-                    <DownloadFile/>
+
+
                 </div>
                 <hr/>
                 <Information contacts={props.profile.contacts} lookingForAJob={props.profile.lookingForAJob}
